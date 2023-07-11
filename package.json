@@ -1,0 +1,20 @@
+{
+  "name": "PW_Shopping",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pwChrome": "playwright test amazon.spec.ts --workers 1 --project=chromium --headed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.35.1",
+    "@types/node": "^20.4.1",
+    "eslint-plugin-playwright": "^0.15.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1"
+  }
+}
