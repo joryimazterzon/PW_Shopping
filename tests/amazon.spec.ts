@@ -11,4 +11,5 @@ test("Search products", async ({ page }) => {
   const product = "pull up bar";
   await item.searchProduct(process.env.PRODUCT);
   await item.selectCheapestProduct(Number(process.env.THRESHOLD));
+  await item.addToCart();
 });

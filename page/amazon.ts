@@ -1,4 +1,5 @@
 import { expect, Locator, Page } from "@playwright/test";
+import exp from "constants";
 
 export class Product {
   readonly page: Page;
@@ -6,6 +7,10 @@ export class Product {
   readonly searchBtn: Locator;
   readonly productLb: Locator;
   readonly priceTagLb: Locator;
+  readonly comprarLb: Locator;
+  readonly agregarBtn: Locator;
+  readonly agregadoLb: Locator;
+  readonly countLb: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -13,6 +18,12 @@ export class Product {
     this.searchBtn = page.getByTestId("nav-search-submit-button");
     this.productLb = page.locator("h1 span.a-color-state.a-text-bold");
     this.priceTagLb = page.locator("span.a-price-whole");
+    this.comprarLb = page.getByText("Comprar nuevo:");
+    this.agregarBtn = page.getByTitle("Agregar al Carrito");
+    this.countLb = page.getByTestId("nav-cart-count");
+    this.agregadoLb = page.locator(
+      "span.a-size-medium-plus.a-color-base.sw-atc-text.a-text-bold"
+    );
   }
 
   /**
@@ -74,5 +85,18 @@ export class Product {
         threshold
       );
     }
+  }
+
+  /**
+   * Add the product to the shopping cart
+   *
+   * @example
+   *    Product.addToCart()
+   */
+  async addToCart() {
+    await this.comprarLb.click();
+    await this.agregarBtn.click();
+    await expect(this.agregadoLb).toContainText("Agregado al carrito");
+    await expect(this.countLb).toHaveText("1");
   }
 }
